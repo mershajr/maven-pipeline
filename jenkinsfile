@@ -1,0 +1,23 @@
+node{
+   stage ('downloading the git'){
+
+      git credentialsId: 'meris', url: 'https://github.com/mershajr/Maven-student.git'
+    }
+    stage ('cleaning the old artifacts'){
+     sh label: '', script: 'mvn clean'
+    }
+    stage ('compiling the code'){
+     sh label: '', script: 'mvn compile'
+    }
+    stage ('codescanner'){
+     sh label: '', script: '''mvn clean compile sonar:sonar \\
+  -Dsonar.host.url=http://34.93.202.80:9000 \\
+  -Dsonar.login=eaffd50d4ed5634cd08019d102af4dd08b52e666'''
+    }
+    stage ('packaging'){
+    sh label: '', script: 'mvn package'
+    }
+    stage ('deploying'){
+     sh label: '', script: 'mvn deploy'
+    }
+}
