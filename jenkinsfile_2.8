@@ -11,7 +11,7 @@ node{
     }
     stage ('codescanner'){
      sh label: '', script: '''mvn clean compile sonar:sonar \\
-  -Dsonar.host.url=http://34.93.124.27:9000 \\
+  -Dsonar.host.url=http://10.160.0.43:9000 \\
   -Dsonar.login=eaffd50d4ed5634cd08019d102af4dd08b52e666'''
     }
     stage ('packaging'){
